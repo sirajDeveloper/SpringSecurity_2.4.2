@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    Login: ${user.login}
-    Password: ${user.password}
-    <br>
+<table class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Login</th>
+        <th>Password</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${user}">
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.password}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

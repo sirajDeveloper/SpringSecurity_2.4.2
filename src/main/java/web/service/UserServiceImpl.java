@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService, RoleRepository {
     @Autowired
     private RoleRepository roleRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
     @Override
@@ -53,6 +52,11 @@ public class UserServiceImpl implements UserService, RoleRepository {
     @Transactional
     public void updateUser(User user) {
         userDao.updateUser(user);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
     }
 
     public User findUserByUserName(String userName) {
