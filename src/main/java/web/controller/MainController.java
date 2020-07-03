@@ -9,16 +9,23 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import web.model.User;
 import web.service.UserService;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/")
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping(value = "/admin")
     public String showUsersTable(ModelMap model) {
         model.addAttribute("users", userService.getAllUsers());
         return "index.html";
