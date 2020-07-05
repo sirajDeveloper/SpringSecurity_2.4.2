@@ -1,12 +1,9 @@
 package web.service;
 
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.RoleRepository;
-import web.dao.UserDao;
+import web.dao.RoleDao;
 import web.dao.UserDaoImpl;
 import web.model.Role;
 import web.model.User;
@@ -14,13 +11,13 @@ import web.model.User;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, RoleRepository {
+public class UserServiceImpl implements UserService, RoleDao {
 
     @Autowired
     private UserDaoImpl userDao;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleDao roleRepository;
 
 
 
@@ -55,15 +52,13 @@ public class UserServiceImpl implements UserService, RoleRepository {
     }
 
     @Override
+    @Transactional
     public User getUserByName(String name) {
         return userDao.getUserByName(name);
     }
 
-    public User findUserByUserName(String userName) {
-        return userDao.getUserByName(userName);
-    }
-
     @Override
+    @Transactional
     public Role findByRole(String role) {
         return roleRepository.findByRole(role);
     }

@@ -5,6 +5,6 @@ import web.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface RoleRepository {
+public interface RoleDao {
     Role findByRole(String role);
 }

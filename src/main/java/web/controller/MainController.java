@@ -2,6 +2,7 @@ package web.controller;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,9 +30,13 @@ public class MainController {
     }
 
     @GetMapping("/user")
-    public String user(ModelMap modelMap, User user) {
-        modelMap.addAttribute("user", user);
-        return "user";
+    public String user(ModelMap modelMap, Authentication auth) {
+        if (auth.isAuthenticated()) {
+            String userName = auth.getName();
+            User user = userService.getUserByName(userName);
+            modelMap.addAttribute("user", user);
+        }
+        return "user"; 
     }
 
     @GetMapping(value = "/admin")
