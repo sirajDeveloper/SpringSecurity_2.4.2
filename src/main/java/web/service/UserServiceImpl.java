@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleDao;
 import web.dao.UserDaoImpl;
+import web.dao.UserRolesDao;
 import web.model.Role;
 import web.model.User;
 
@@ -17,9 +18,10 @@ public class UserServiceImpl implements UserService, RoleDao {
     private UserDaoImpl userDao;
 
     @Autowired
-    private RoleDao roleRepository;
+    private RoleDao roleDao;
 
-
+    @Autowired
+    private UserRolesDao userRolesDao;
 
     @Override
     @Transactional
@@ -59,7 +61,13 @@ public class UserServiceImpl implements UserService, RoleDao {
 
     @Override
     @Transactional
+    public void addUserRoles(Long userId, String userRoles) {
+        userRolesDao.addUserRoles(userId, userRoles);
+    }
+
+    @Override
+    @Transactional
     public Role findByRole(String role) {
-        return roleRepository.findByRole(role);
+        return roleDao.findByRole(role);
     }
 }

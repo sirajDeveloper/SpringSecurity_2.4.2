@@ -3,9 +3,11 @@ package web.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 
+@Repository
 public class UserRolesDaoImpl implements UserRolesDao {
 
     @Autowired
@@ -20,5 +22,6 @@ public class UserRolesDaoImpl implements UserRolesDao {
             query.setParameter(1, userId);
             query.executeUpdate();
         }
+        session.close();
     }
 }
