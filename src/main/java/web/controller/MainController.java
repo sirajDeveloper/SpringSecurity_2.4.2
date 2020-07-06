@@ -56,9 +56,7 @@ public class MainController {
             return "add-user";
         }
         userService.addUser(user);
-
         User userOfBd = userService.getUserByName(user.getUsername());
-
         if (user.getRole().equalsIgnoreCase("admin")) {
             userService.addUserRoles(userOfBd.getId(), userOfBd.getRole());
         } else {
